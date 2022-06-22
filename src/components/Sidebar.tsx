@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { Lesson } from './Lesson';
+import { Lesson, LessonProps } from './Lesson';
 
 const GET_LESSONS_QUERY = gql`
   query {
@@ -14,13 +14,7 @@ const GET_LESSONS_QUERY = gql`
 `;
 
 interface GetLessonQueryResponse {
-  lessons: {
-    id: string;
-    title: string;
-    slug: string;
-    availableAt: string;
-    lessonType: 'live' | 'class';
-  }[];
+  lessons: LessonProps[];
 }
 
 export function Sidebar() {
@@ -31,8 +25,8 @@ export function Sidebar() {
       <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">Cronograma de aulas</span>
 
       <div className="flex flex-col gap-8">
-        {data?.lessons.map(lesson => (
-          <Lesson key={lesson.id} title={lesson.title} slug={lesson.slug} availableAt={new Date(lesson.availableAt)} type={lesson.lessonType} />
+        {data?.lessons.map(({ id, title, slug, availableAt, lessonType }) => (
+          <Lesson key={id} title={title} slug={slug} availableAt={new Date(availableAt)} lessonType={lessonType} />
         ))}
       </div>
     </aside>
