@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import '@vime/core/themes/default.css';
 import { DefaultUi, Player, Youtube } from '@vime/react';
 import { CaretRight, DiscordLogo, FileArrowDown, Image, Lightning } from 'phosphor-react';
+import { Footer } from './Footer';
 
 const GET_LESSON_BY_SLUG_QUERY = gql`
   query GetLessonBySlug($slug: String) {
@@ -122,6 +123,8 @@ export function Video({ lessonSlug }: VideoProps) {
           </a>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
